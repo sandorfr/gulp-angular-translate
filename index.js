@@ -15,13 +15,21 @@ function addTranslation(opt) {
             // return empty file
             return cb(null, file);
         }
+        gutil.log(file.path);
+        var languageTag = /.*lang-(\w+).*/gi.exec(file.path)[1];
+        gutil.log("processing " + languageTag + " file");
         if (file.isBuffer()) {
             var map = JSON.parse(file.contents.toString('utf-8'));
             if (map[newKey]) {
                 gutil.log('key already exists in file : ' + file.path + ', use --force to override');
             }
             else {
-                map[newKey] = defaultValue;
+                if (yargs.argv[languageTag]) {
+                    map[newKey] = yargs.argv[languageTag];
+                }
+                else {
+                    map[newKey] = defaultValue;
+                }
                 var keys = Object.keys(map);
                 keys = keys.sort(function (a, b) { return a < b ? -1 : 1; });
                 file.contents = new Buffer(JSON.stringify(map, keys, 4), "utf-8");

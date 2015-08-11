@@ -7,7 +7,7 @@ import gutil = require('gulp-util');
 import yargs = require('yargs');
 import through = require('through2');
 
-var PLUGIN_NAME = 'gulp-angular-translate'
+var PLUGIN_NAME = 'gulp-angular-translate';
 
 export function addTranslation(opt) {
     var newKey = yargs.argv.key;
@@ -21,13 +21,22 @@ export function addTranslation(opt) {
             return cb(null, file);
         }
 
+        gutil.log(file.path);
+        var languageTag = /.*lang-(\w+).*/gi.exec(file.path)[1];
+        gutil.log("processing " + languageTag + " file");
+
         if (file.isBuffer()) {
             var map = JSON.parse((<Buffer>file.contents).toString('utf-8'));
 
             if (map[newKey]) {
                 gutil.log('key already exists in file : ' + file.path + ', use --force to override');
             } else {
-                map[newKey] = defaultValue;
+                if (yargs.argv[languageTag]) {
+                    map[newKey] = yargs.argv[languageTag];
+                } else {
+                    map[newKey] = defaultValue;
+                }
+
                 var keys = Object.keys(map);
                 keys = keys.sort((a, b)=> a < b ? -1 : 1);
                 file.contents = new Buffer(JSON.stringify(map, keys, 4), "utf-8");
