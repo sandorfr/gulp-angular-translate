@@ -1,0 +1,16 @@
+{
+  "name": "gulp-angular-translate",
+  "version": "0.0.15",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gulp-util": "^3.0.6",
+    "through2": "^2.0.0",
+    "yargs": "^3.17.1"
+  }
+}
