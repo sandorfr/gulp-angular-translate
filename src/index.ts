@@ -10,7 +10,7 @@ import through = require('through2');
 var PLUGIN_NAME = 'gulp-angular-translate';
 
 export function addTranslation(opt: any) {
-    var newKey = yargs.argv.key;
+    var newKey = yargs.string('key').argv.key;
     var defaultValue = '## ' + newKey;
 
     gutil.log("Adding key : " + newKey);
@@ -30,7 +30,7 @@ export function addTranslation(opt: any) {
             if (map[newKey]) {
                 //gutil.log('key already exists in file : ' + file.path + ', use --force to override');
             } else {
-                if (yargs.argv[languageTag]) {
+                if (yargs.string(languageTag).argv[languageTag]) {
                     map[newKey] = yargs.argv[languageTag];
                 } else {
                     //gutil.log("Missing translation for language " + languageTag + ". A placeholder will be used");

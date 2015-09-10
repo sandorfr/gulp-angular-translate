@@ -1,6 +1,6 @@
 {
  "name": "gulp-angular-translate",
- "version": "0.0.28",
+ "version": "0.0.31",
  "description": "",
  "main": "lib/index.js",
  "scripts": {
