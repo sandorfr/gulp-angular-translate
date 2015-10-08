@@ -1,6 +1,6 @@
 {
  "name": "gulp-angular-translate",
- "version": "0.0.31",
+ "version": "0.0.34",
  "description": "",
  "main": "lib/index.js",
  "scripts": {
@@ -9,6 +9,7 @@
  "author": "",
  "license": "ISC",
  "dependencies": {
+  "csv-parse": "^1.0.0",
   "gulp-util": "^3.0.6",
   "through2": "^2.0.0",
   "yargs": "^3.17.1"
